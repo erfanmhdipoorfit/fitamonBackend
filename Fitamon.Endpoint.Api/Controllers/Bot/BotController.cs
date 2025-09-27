@@ -9,8 +9,6 @@ namespace Fitamon.Endpoint.Api.Controllers.Bot
 
         public BotController(IMediator mediator) => _mediator = mediator;
 
-        [HttpPost]
-        public async Task<IActionResult> Create(CreateUserCommand command)
-            => Ok(await _mediator.Send(command));
+ 
     }
 }
