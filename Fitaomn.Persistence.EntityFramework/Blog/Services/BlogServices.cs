@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fitaomn.Persistence.EntityFramework.Bot
+namespace Fitaomn.Persistence.EntityFramework.Blog.Services
 {
-   public class BotDbContext
+  public  class BlogServices
     {
     }
 }

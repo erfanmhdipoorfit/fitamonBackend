@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Fitaomn.Persistence.EntityFramework.Bot.Services
 {
-    class BotService
+   public class BotService
     {
     }
 }

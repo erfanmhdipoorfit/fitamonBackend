@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fitaomn.Persistence.EntityFramework.Bot
+namespace Fitamon.Domain.Blog.Entities
 {
-   public class BotDbContext
+    class Comment
     {
     }
 }
