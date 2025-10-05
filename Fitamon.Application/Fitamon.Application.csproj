@@ -15,11 +15,4 @@
     <ProjectReference Include="..\Fitamon.Domain\Fitamon.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Blog\Command\" />
-    <Folder Include="Blog\CommandHandler\" />
-    <Folder Include="Blog\QueryHandler\" />
-    <Folder Include="Blog\Query\" />
-  </ItemGroup>
-
 </Project>

@@ -1,7 +1,6 @@
 ﻿using Fitamon.Application.Bot.Query;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.OpenApi.Models;
 
 namespace Fitamon.Endpoint.Api.Controllers.Bot
 {
@@ -24,16 +23,16 @@ namespace Fitamon.Endpoint.Api.Controllers.Bot
         public async Task<IActionResult> List(
              int pageIndex, int pageSize, [FromQuery] List<int>? stateId)
         {
-          
-                var query = new AllBotQueryFilter(
-                    pageIndex,
-                    pageSize
-       
-                  );
-                var result = await _mediator.Send(query);
-                return Ok(result);
-            
-        
+
+            var query = new AllBotQueryFilter(
+                pageIndex,
+                pageSize
+
+              );
+            var result = await _mediator.Send(query);
+            return Ok(result);
+
+
         }
     }
 }

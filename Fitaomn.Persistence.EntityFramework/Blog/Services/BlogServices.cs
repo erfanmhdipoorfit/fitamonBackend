@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Fitaomn.Persistence.EntityFramework.Blog.Services
+﻿namespace Fitaomn.Persistence.EntityFramework.Blog.Services
 {
-  public  class BlogServices
+    public class BlogServices
     {
     }
 }
