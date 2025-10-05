@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using BlogModel = Fitamon.Domain.Blog.Entities.Blog;
 
 namespace Fitaomn.Persistence.EntityFramework.Blog
 {
-   public class BlogDbContext
+    public class BlogDbContext:DbContext
     {
+        public DbSet<BlogModel> Blog { get; set; }
     }
 }

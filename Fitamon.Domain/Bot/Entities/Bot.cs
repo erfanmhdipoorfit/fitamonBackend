@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Fitamon.Domain.Bot.Entities
+﻿namespace Fitamon.Domain.Bot.Entities
 {
-    class Bot
+    public class Bot
     {
+        public string Name { get; set; }
     }
 }

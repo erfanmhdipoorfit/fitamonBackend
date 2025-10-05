@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using Microsoft.EntityFrameworkCore;
+using BotModel = Fitamon.Domain.Bot.Entities.Bot;
 namespace Fitaomn.Persistence.EntityFramework.Bot
 {
-   public class BotDbContext
+    public class BotDbContext
     {
+        public DbSet<BotModel> Blog { get; set; }
     }
 }
