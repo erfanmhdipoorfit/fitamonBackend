@@ -4,20 +4,17 @@ using Swashbuckle.AspNetCore.SwaggerUI;
 using System.ComponentModel;
 using System.Reflection;
 using Microsoft.AspNetCore.Authentication.Negotiate;
-using MediatR;
 
-// 🔹 اضافه شده: برای EF Core و سرویس‌ها
-using Microsoft.EntityFrameworkCore;
-using Fitamon.Persistence.EntityFramework.Bot; // مسیر BotDbContext
-using Fitamon.Domain.Bot.Contracts;
-using Fitamon.Persistence.EntityFramework.Bot.Services; // مسیر BotServices
+// 🔹 فقط رفرنس به لایه‌های اصلی (نه کلاس‌های داخلی!)
+using Fitamon.Application;
+using Fitamon.Persistence.EntityFramework;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 var swaggerConfig = configuration.GetSection("Swagger");
 var docs = swaggerConfig.GetSection("Docs").Get<List<SwaggerDocConfig>>();
 
-// Add services to the container.
+// Authentication
 builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
    .AddNegotiate();
 
@@ -28,19 +25,12 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddControllers();
 
-// 🔹 1. رجیستر DbContext
-builder.Services.AddDbContext<BotDbContext>(options =>
-    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+// 🔹 رجیستر سرویس‌ها از لایه‌های مختلف (تمیز و مرتب!)
+builder.Services.AddApplicationServices(); // از لایه Application
+builder.Services.AddPersistenceServices(configuration.GetConnectionString("DefaultConnection")); // از لایه Persistence
 
-// 🔹 2. رجیستر سرویس‌های دامنه
-builder.Services.AddScoped<IBotServices, BotServices>();
-
-// 🔹 3. رجیستر MediatR
-builder.Services.AddMediatR(cfg =>
-    cfg.RegisterServicesFromAssembly(typeof(Fitamon.Application.Bot.Query.AllBotQueryFilter).Assembly));
-
+// Swagger
 builder.Services.AddEndpointsApiExplorer();
-
 builder.Services.AddSwaggerGen(opt =>
 {
     opt.CustomSchemaIds(x =>
@@ -77,4 +67,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
+app.Run();
 app.Run();
