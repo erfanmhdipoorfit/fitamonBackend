@@ -1,6 +1,9 @@
-﻿namespace Fitamon.Domain.Bot.Contracts
+﻿using BotEntity = Fitamon.Domain.Bot.Entities.Bot;
+
+namespace Fitamon.Domain.Bot.Contracts
 {
-    class IBotServices
+    public interface IBotServices
     {
+        Task<List<BotEntity>> GetAllBot(int pageIndex,int pageSize);
     }
 }

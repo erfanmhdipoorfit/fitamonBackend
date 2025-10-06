@@ -3,8 +3,14 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.ComponentModel;
 using System.Reflection;
-using Microsoft.AspNetCore.Authentication.Negotiate; // ⚠️ الزامی برای NegotiateDefaults
+using Microsoft.AspNetCore.Authentication.Negotiate;
+using MediatR;
 
+// 🔹 اضافه شده: برای EF Core و سرویس‌ها
+using Microsoft.EntityFrameworkCore;
+using Fitamon.Persistence.EntityFramework.Bot; // مسیر BotDbContext
+using Fitamon.Domain.Bot.Contracts;
+using Fitamon.Persistence.EntityFramework.Bot.Services; // مسیر BotServices
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -22,6 +28,17 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddControllers();
 
+// 🔹 1. رجیستر DbContext
+builder.Services.AddDbContext<BotDbContext>(options =>
+    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+// 🔹 2. رجیستر سرویس‌های دامنه
+builder.Services.AddScoped<IBotServices, BotServices>();
+
+// 🔹 3. رجیستر MediatR
+builder.Services.AddMediatR(cfg =>
+    cfg.RegisterServicesFromAssembly(typeof(Fitamon.Application.Bot.Query.AllBotQueryFilter).Assembly));
+
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(opt =>
@@ -38,31 +55,6 @@ builder.Services.AddSwaggerGen(opt =>
 
     docs?.ForEach(doc =>
         opt.SwaggerDoc(doc.Name, new OpenApiInfo { Title = doc.Title, Version = doc.Version }));
-
-    //// 🔹 همچنان نگه داشته شد (بدون حذف)
-    //opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-    //{
-    //    In = ParameterLocation.Header,
-    //    Description = "Please enter token",
-    //    Name = "Authorization",
-    //    Type = SecuritySchemeType.Http,
-    //    BearerFormat = "JWT",
-    //    Scheme = "bearer"
-    //});
-    //opt.AddSecurityRequirement(new OpenApiSecurityRequirement
-    //{
-    //    {
-    //        new OpenApiSecurityScheme
-    //        {
-    //            Reference = new OpenApiReference
-    //            {
-    //                Type = ReferenceType.SecurityScheme,
-    //                Id = "Bearer"
-    //            }
-    //        },
-    //        new string[] { }
-    //    }
-    //});
 });
 
 var app = builder.Build();
@@ -82,7 +74,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
-
 app.UseAuthorization();
 app.MapControllers();
 

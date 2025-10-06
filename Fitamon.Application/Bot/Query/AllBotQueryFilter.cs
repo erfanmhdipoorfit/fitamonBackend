@@ -1,6 +1,8 @@
-﻿namespace Fitamon.Application.Bot.Query
+﻿using MediatR;
+using BotEntity = Fitamon.Domain.Bot.Entities.Bot;
+namespace Fitamon.Application.Bot.Query
 {
-    public class AllBotQueryFilter
+    public class AllBotQueryFilter : IRequest<List<BotEntity>>
     {
         public AllBotQueryFilter(int pageIndex, int pageSize)
         {

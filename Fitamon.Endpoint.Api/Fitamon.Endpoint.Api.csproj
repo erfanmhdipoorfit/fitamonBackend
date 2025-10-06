@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Fitamon.Application\Fitamon.Application.csproj" />
-    <ProjectReference Include="..\Fitaomn.Persistence.EntityFramework\Fitaomn.Persistence.EntityFramework.csproj" />
+    <ProjectReference Include="..\Fitaomn.Persistence.EntityFramework\Fitamon.Persistence.EntityFramework.csproj" />
   </ItemGroup>
 
 </Project>

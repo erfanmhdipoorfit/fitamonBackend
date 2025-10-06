@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using BlogModel = Fitamon.Domain.Blog.Entities.Blog;
+using BlogEntity = Fitamon.Domain.Blog.Entities.Blog;
 
-namespace Fitaomn.Persistence.EntityFramework.Blog
+namespace Fitamon.Persistence.EntityFramework.Blog
 {
     public class BlogDbContext : DbContext
     {
@@ -9,6 +9,6 @@ namespace Fitaomn.Persistence.EntityFramework.Blog
       : base(options)
         {
         }
-        public DbSet<BlogModel> Blog { get; set; }
+        public DbSet<BlogEntity> Blog { get; set; }
     }
 }

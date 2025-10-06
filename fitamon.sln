@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35806.99 d17.13
+VisualStudioVersion = 17.13.35806.99
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fitamon.Endpoint.Api", "Fit
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistence", "Persistence", "{8F8A335F-638C-4E14-9272-35195D825A63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fitaomn.Persistence.EntityFramework", "Fitaomn.Persistence.EntityFramework\Fitaomn.Persistence.EntityFramework.csproj", "{9B08AF66-46E0-488A-83C9-A324F1BC4356}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fitamon.Persistence.EntityFramework", "Fitaomn.Persistence.EntityFramework\Fitamon.Persistence.EntityFramework.csproj", "{9B08AF66-46E0-488A-83C9-A324F1BC4356}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

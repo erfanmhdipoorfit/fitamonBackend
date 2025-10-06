@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using BotModel = Fitamon.Domain.Bot.Entities.Bot;
-namespace Fitaomn.Persistence.EntityFramework.Bot
+using BotEntity = Fitamon.Domain.Bot.Entities.Bot;
+namespace Fitamon.Persistence.EntityFramework.Bot
 {
     public class BotDbContext : DbContext
     {
@@ -8,6 +8,6 @@ namespace Fitaomn.Persistence.EntityFramework.Bot
      : base(options)
         {
         }
-        public DbSet<BotModel> Blog { get; set; }
+        public DbSet<BotEntity> Bots { get; set; }
     }
 }

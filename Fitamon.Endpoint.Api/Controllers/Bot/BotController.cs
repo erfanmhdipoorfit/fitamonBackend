@@ -21,7 +21,7 @@ namespace Fitamon.Endpoint.Api.Controllers.Bot
         [HttpGet("GetAll")]
         //[ActionFaName("لیست")]
         public async Task<IActionResult> List(
-             int pageIndex, int pageSize, [FromQuery] List<int>? stateId)
+             int pageIndex, int pageSize)
         {
 
             var query = new AllBotQueryFilter(
