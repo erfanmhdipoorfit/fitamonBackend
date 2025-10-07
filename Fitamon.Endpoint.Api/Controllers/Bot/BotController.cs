@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Fitamon.Endpoint.Api.Controllers.Bot
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class BotController : Controller
     {
         private readonly IMediator _mediator;
@@ -19,7 +21,7 @@ namespace Fitamon.Endpoint.Api.Controllers.Bot
         /// <param name="pageSize"></param>
         /// <returns></returns>
         [HttpGet("GetAll")]
-        //[ActionFaName("لیست")]
+ 
         public async Task<IActionResult> List(
              int pageIndex, int pageSize)
         {
@@ -33,6 +35,31 @@ namespace Fitamon.Endpoint.Api.Controllers.Bot
             return Ok(result);
 
 
+        }
+
+        // GET api/<BlogController>/5
+        [HttpGet("{id}")]
+        public string Get(int id)
+        {
+            return "value";
+        }
+
+        // POST api/<BlogController>
+        [HttpPost]
+        public void Post([FromBody] string value)
+        {
+        }
+
+        // PUT api/<BlogController>/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] string value)
+        {
+        }
+
+        // DELETE api/<BlogController>/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
         }
     }
 }
