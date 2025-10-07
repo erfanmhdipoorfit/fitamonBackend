@@ -1,22 +1,21 @@
-﻿// Fitamon.Persistence.EntityFramework/ServiceRegistration.cs
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using Fitamon.Domain.Bot.Contracts;
-using Fitamon.Persistence.EntityFramework.Bot;
+﻿using Fitamon.Domain.Bot.Contracts;
 using Fitamon.Persistence.EntityFramework.Bot.Services;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Fitamon.Persistence.EntityFramework
+public static class ServiceRegistration
 {
-    public static class ServiceRegistration
+    public static IServiceCollection AddPersistenceServices(this IServiceCollection services, string? connectionString)
     {
-        public static IServiceCollection AddPersistenceServices(this IServiceCollection services, string connectionString)
-        {
-            services.AddDbContext<BotDbContext>(options =>
-                options.UseSqlServer(connectionString));
+        // ✅ بررسی null بودن Connection String
+        if (string.IsNullOrEmpty(connectionString))
+            throw new InvalidOperationException("Connection string 'BotDbContext' is not configured.");
 
-            services.AddScoped<IBotServices, BotServices>();
+        services.AddDbContext<BotDbContext>(options =>
+            options.UseSqlServer(connectionString));
 
-            return services;
-        }
+        services.AddScoped<IBotServices, BotServices>();
+
+        return services;
     }
 }

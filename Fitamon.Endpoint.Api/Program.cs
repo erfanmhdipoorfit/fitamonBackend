@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.Negotiate;
 // 🔹 فقط رفرنس به لایه‌های اصلی (نه کلاس‌های داخلی!)
 using Fitamon.Application;
 using Fitamon.Persistence.EntityFramework;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -27,8 +28,9 @@ builder.Services.AddControllers();
 
 // 🔹 رجیستر سرویس‌ها از لایه‌های مختلف (تمیز و مرتب!)
 builder.Services.AddApplicationServices(); // از لایه Application
-builder.Services.AddPersistenceServices(configuration.GetConnectionString("DefaultConnection")); // از لایه Persistence
-
+var conn = builder.Configuration.GetConnectionString("FitamonDb"); 
+Console.WriteLine($"🔍 Connection String: {(string.IsNullOrEmpty(conn) ? "NULL!" : "OK")}"); //تست کانکشن استرینگ
+builder.Services.AddPersistenceServices(configuration.GetConnectionString("FitamonDb")); // از لایه Persistence
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(opt =>

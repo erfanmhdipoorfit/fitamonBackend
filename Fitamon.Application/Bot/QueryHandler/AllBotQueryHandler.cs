@@ -1,6 +1,8 @@
 ﻿using Fitamon.Application.Bot.Query;
 using Fitamon.Domain.Bot.Contracts;
-using BotEntity = Fitamon.Domain.Bot.Entities.Bot;
+using Fitamon.Domain.Bot.Entities;
+
+//using BotEntity = Fitamon.Domain.Bot.Entities.BotEntity;
 using MediatR;
 
 namespace Fitamon.Application.Bot.QueryHandler

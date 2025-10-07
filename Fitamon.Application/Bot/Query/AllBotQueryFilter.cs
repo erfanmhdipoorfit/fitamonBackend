@@ -1,5 +1,6 @@
-﻿using MediatR;
-using BotEntity = Fitamon.Domain.Bot.Entities.Bot;
+﻿using Fitamon.Domain.Bot.Entities;
+using MediatR;
+//using BotEntity = Fitamon.Domain.Bot.Entities.BotEntity;
 namespace Fitamon.Application.Bot.Query
 {
     public class AllBotQueryFilter : IRequest<List<BotEntity>>

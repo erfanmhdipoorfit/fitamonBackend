@@ -1,4 +1,6 @@
-﻿using BotEntity = Fitamon.Domain.Bot.Entities.Bot;
+﻿//using BotEntity = Fitamon.Domain.Bot.Entities.BotEntity;
+
+using Fitamon.Domain.Bot.Entities;
 
 namespace Fitamon.Domain.Bot.Contracts
 {

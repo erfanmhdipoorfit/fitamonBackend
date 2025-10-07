@@ -1,42 +1,34 @@
 ﻿
 using Fitamon.Domain.Bot.Contracts;
-using BotEntity = Fitamon.Domain.Bot.Entities.Bot;
-using System;
+using Fitamon.Domain.Bot.Entities;
+using Microsoft.EntityFrameworkCore;
+//using BotEntity = Fitamon.Domain.Bot.Entities.BotEntity;
 
-namespace Fitamon.Persistence.EntityFramework.Bot.Services
+namespace Fitamon.Persistence.EntityFramework.Bot.Services;
+
+public class BotServices : IBotServices
+
+
 {
-    public class BotServices : IBotServices
-
-
+    private readonly BotDbContext _context;
+    public BotServices(
+        BotDbContext context
+      )
     {
-        private readonly BotDbContext _context;
-        public BotServices(
-            BotDbContext context
-          )
-        {
-            _context = context;
-        }
-        public async Task<List<BotEntity>> GetAllBot(int pageIndex, int pageSize)
-        {
-            // داده‌های نمونه (در واقعیت از دیتابیس می‌آید)
-            var allBots = new List<BotEntity>
+        _context = context;
+    }
+    public async Task<List<BotEntity>> GetAllBot(int pageIndex, int pageSize)
     {
-        new BotEntity { Name = "FitnessBot" },
-        new BotEntity { Name = "DietCoach" },
-        new BotEntity { Name = "WorkoutPal" },
-        new BotEntity { Name = "YogaGuide" },
-        new BotEntity { Name = "MealPlanner" },
-        new BotEntity { Name = "RunningCoach" },
-        new BotEntity { Name = "SleepTracker" }
-    };
+        // اعتبارسنجی ورودی
+        if (pageIndex < 1) pageIndex = 1;
+        if (pageSize < 1) pageSize = 10;
 
-            // ✅ اعمال پیجینیشن
-            var pagedBots = allBots
-                .Skip((pageIndex - 1) * pageSize) // صفحه‌ها معمولاً از 1 شروع می‌شوند
-                .Take(pageSize)
-                .ToList();
+        // خواندن از دیتابیس + پیجینیشن
+        var pagedBots = await _context.Bots
+            .Skip((pageIndex - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
 
-            return await Task.FromResult(pagedBots);
-        }
+        return pagedBots;
     }
 }

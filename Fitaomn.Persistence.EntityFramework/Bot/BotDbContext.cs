@@ -1,13 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
-using BotEntity = Fitamon.Domain.Bot.Entities.Bot;
-namespace Fitamon.Persistence.EntityFramework.Bot
+﻿using Fitamon.Domain.Bot.Entities;
+using Microsoft.EntityFrameworkCore;
+
+public class BotDbContext : DbContext
 {
-    public class BotDbContext : DbContext
+    public BotDbContext(DbContextOptions<BotDbContext> options) : base(options) { }
+
+    public DbSet<BotEntity> Bots { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        public BotDbContext(DbContextOptions<BotDbContext> options)
-     : base(options)
-        {
-        }
-        public DbSet<BotEntity> Bots { get; set; }
+        // تنظیم اسکیما به "bot"
+        modelBuilder.Entity<BotEntity>().ToTable("Bot", schema: "bot");
+
+        base.OnModelCreating(modelBuilder);
     }
 }
