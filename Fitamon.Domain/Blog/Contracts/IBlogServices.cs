@@ -1,6 +1,8 @@
-﻿namespace Fitamon.Domain.Blog.Contracts
+﻿using Fitamon.Domain.Blog.Entities;
+
+namespace Fitamon.Domain.Blog.Contracts;
+
+public interface IBlogServices
 {
-   public class IBlogServices
-    {
-    }
+    Task<List<BlogEntity>> GetAllBlog(int pageIndex, int pageSize);
 }

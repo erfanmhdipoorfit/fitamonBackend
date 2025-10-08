@@ -1,5 +1,7 @@
 ﻿using Fitamon.Domain.Bot.Contracts;
+using Fitamon.Domain.Blog.Contracts;
 using Fitamon.Persistence.EntityFramework.Bot.Services;
+using Fitamon.Persistence.EntityFramework.Blog.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,9 +15,12 @@ public static class ServiceRegistration
 
         services.AddDbContext<BotDbContext>(options =>
             options.UseSqlServer(connectionString));
-
+        services.AddDbContext<BlogDbContext>(options =>
+            options.UseSqlServer(connectionString));
         services.AddScoped<IBotServices, BotServices>();
-
+        services.AddScoped<IBlogServices, BlogServices>();
+      
+      
         return services;
     }
 }

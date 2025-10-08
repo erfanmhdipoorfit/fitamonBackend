@@ -1,14 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
-using BlogEntity = Fitamon.Domain.Blog.Entities.Blog;
+﻿using Fitamon.Domain.Blog.Entities;
+using Microsoft.EntityFrameworkCore;
 
-namespace Fitamon.Persistence.EntityFramework.Blog
+public class BlogDbContext : DbContext
 {
-    public class BlogDbContext : DbContext
+    public BlogDbContext(DbContextOptions<BlogDbContext> options) : base(options) { }
+
+    public DbSet<BlogEntity> Blogs { get; set; } // بهتره اسمش جمع باشه: Blogs
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        public BlogDbContext(DbContextOptions<BlogDbContext> options)
-      : base(options)
-        {
-        }
-        public DbSet<BlogEntity> Blog { get; set; }
+        // ✅ درست: روی BlogEntity تنظیم کنید
+        modelBuilder.Entity<BlogEntity>().ToTable("Blog", schema: "blog");
+
+        base.OnModelCreating(modelBuilder);
     }
 }

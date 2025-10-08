@@ -1,6 +1,6 @@
 ﻿namespace Fitamon.Application.Blog.QueryHandler
 {
-    class AddBlogQueryHandler
+   public class GetBlogByIdQueryHandler
     {
     }
 }
