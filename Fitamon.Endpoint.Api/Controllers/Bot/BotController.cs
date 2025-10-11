@@ -49,7 +49,7 @@ namespace Fitamon.Endpoint.Api.Controllers.Bot
              int botId)
         {
 
-            var query = new GetBotByIdQueryFilter(
+            var query = new GetBlogByIdQueryFilter(
                 botId
 
               );

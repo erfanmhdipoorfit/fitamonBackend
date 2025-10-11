@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Fitamon.Application.Bot.QueryHandler
 {
-    public class GetBotByIdQueryHandler : IRequestHandler<GetBotByIdQueryFilter, BotEntity>
+    public class GetBotByIdQueryHandler : IRequestHandler<GetBlogByIdQueryFilter, BotEntity>
     {
 
         private readonly IBotServices _botService;
@@ -14,7 +14,7 @@ namespace Fitamon.Application.Bot.QueryHandler
         {
             _botService = botService;
         }
-        public Task<BotEntity> Handle(GetBotByIdQueryFilter request, CancellationToken cancellationToken)
+        public Task<BotEntity> Handle(GetBlogByIdQueryFilter request, CancellationToken cancellationToken)
         {
             return _botService.GetBotById(request.BotId);
         }

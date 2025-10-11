@@ -3,9 +3,9 @@ using MediatR;
 
 namespace Fitamon.Application.Bot.Query
 {
-   public class GetBotByIdQueryFilter:IRequest<BotEntity>
+   public class GetBlogByIdQueryFilter:IRequest<BotEntity>
     {
-        public GetBotByIdQueryFilter(
+        public GetBlogByIdQueryFilter(
       int botId)
         {
             BotId = botId;
