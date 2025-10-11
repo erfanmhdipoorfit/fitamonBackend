@@ -6,11 +6,11 @@ namespace Fitamon.Application.Blog.Command
 {
     public class CreateBlogCommand:IRequest<CommandResult>
     {
-        public CreateBlogCommand(BlogEntity blog)
+        public CreateBlogCommand(string name)
         {
-            Blog = blog;
+            Name = name;
         }
 
-        public BlogEntity Blog { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace Fitamon.Application.Blog.CommandHandler
 
         public Task<CommandResult> Handle(UpdateBlogCommand request, CancellationToken cancellationToken)
         {
-            return _blogService.UpdateBlogById(request.BlogId, request.Blog);
+            return _blogService.UpdateBlogById(request.BlogId, request.Name);
         }
     }
 }

@@ -10,8 +10,8 @@ namespace Fitamon.Domain.Bot.Contracts
         Task<List<BotEntity>> GetAllBot(int pageIndex,int pageSize);
         Task<BotEntity> GetBotById(int id);
         Task<CommandResult> DeleteBotById(List<int> botIds);
-        Task<CommandResult> UpdateBotById(int botId ,BotEntity bot);
-        Task<CommandResult> CreateBot(BotEntity bot);
+        Task<CommandResult> UpdateBotById(int botId ,string Name);
+        Task<CommandResult> CreateBot(string bot);
 
 
     }

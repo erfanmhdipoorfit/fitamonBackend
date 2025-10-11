@@ -6,13 +6,13 @@ namespace Fitamon.Application.Blog.Command
 {
     public class UpdateBlogCommand:IRequest<CommandResult>
     {
-        public UpdateBlogCommand(int blogId, BlogEntity blog)
+        public UpdateBlogCommand(int blogId, string name)
         {
             BlogId = blogId;
-            Blog = blog;
+            Name = name;
         }
 
         public int BlogId { get; }
-        public BlogEntity Blog { get; }
+        public string Name { get; }
     }
 }

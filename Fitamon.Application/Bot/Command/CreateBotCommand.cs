@@ -6,10 +6,10 @@ namespace Fitamon.Application.Bot.Command
 {
    public class CreateBotCommand:IRequest<CommandResult>
     {
-        public CreateBotCommand( BotEntity bot)
+        public CreateBotCommand(string name)
         {
-            Bot = bot;
+            Name = name;
         }
-        public BotEntity Bot { get; set; }
+        public string Name { get; set; }
     }
 }

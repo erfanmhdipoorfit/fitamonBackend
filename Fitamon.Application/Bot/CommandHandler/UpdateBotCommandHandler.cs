@@ -16,7 +16,7 @@ namespace Fitamon.Application.Bot.CommandHandler
         }
         public Task<CommandResult> Handle(UpdateBotCommand request, CancellationToken cancellationToken)
         {
-            return _botService.UpdateBotById(request.BotId,request.Bot);
+            return _botService.UpdateBotById(request.BotId,request.Name);
         }
     }
 }

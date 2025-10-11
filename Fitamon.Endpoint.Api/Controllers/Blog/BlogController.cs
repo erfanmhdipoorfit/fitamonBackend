@@ -66,9 +66,9 @@ namespace Fitamon.Endpoint.Api.Controllers.Blog
         /// <param name="bot"></param>
         /// <returns></returns>
         [HttpPost("createBlog")]
-        public async Task<IActionResult> Post(BlogEntity Blog)
+        public async Task<IActionResult> Post(CreateBlogCommand filter , CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(new CreateBlogCommand(Blog));
+            var result = await _mediator.Send(filter, cancellationToken);
             return Ok(result);
         }
         /// <summary>
@@ -77,19 +77,12 @@ namespace Fitamon.Endpoint.Api.Controllers.Blog
         /// <param name="blog"></param>
         /// <param name="blogId"></param>
         /// <returns></returns>
-        // PUT api/<BlogController>/5
         [HttpPut("updateBlog")]
-        public async Task<IActionResult> Put(int blogId, BlogEntity blog)
+        public async Task<IActionResult> Put(int blogId, string name)
         {
-            if (blog == null)
+            if (name == null)
                 return BadRequest("Blog data is required.");
-
-            // ✅ امنیت: مطمئن شوید که bot.Id با botId یکی است (اگر bot.Id پر شده)
-            if (blog.Id != 0 && blog.Id != blogId)
-                return BadRequest("Blog ID in URL does not match ID in body.");
-
-            // همیشه از botId (از URL) استفاده کنید — این قرارداد رایج‌تر و امن‌تر است
-            var result = await _mediator.Send(new UpdateBlogCommand(blogId, blog));
+            var result = await _mediator.Send(new UpdateBlogCommand(blogId, name));
             return Ok(result);
         }
 

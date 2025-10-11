@@ -1,5 +1,6 @@
 ﻿using Fitamon.Domain.Blog.Contracts;
 using Fitamon.Domain.Blog.Entities;
+using Fitamon.Domain.Bot.Entities;
 using Microsoft.EntityFrameworkCore;
 using Seyat.Shared.Domain.Dtos;
 
@@ -13,22 +14,25 @@ namespace Fitamon.Persistence.EntityFramework.Blog.Services
         {
             _context = context;
         }
-        public async Task<CommandResult> CreateBlog(BlogEntity blog)
+        public async Task<CommandResult> CreateBlog(string name)
         {
-            if (blog == null)
+            if (name == null)
                 return new CommandResult(false, "blog data cannot be null.");
 
-            if (string.IsNullOrWhiteSpace(blog.Name))
+            if (string.IsNullOrWhiteSpace(name))
                 return new CommandResult(false, "blog name is required.");
 
             try
             {
-                // Id به‌صورت خودکار توسط دیتابیس تنظیم می‌شود (auto-increment)
-                // پس نیازی به ست کردن آن نیست
+           
+                var blog = new BlogEntity
+                {
+                    Name = name.Trim()
+                };
                 _context.Blogs.Add(blog);
                 await _context.SaveChangesAsync();
 
-                // پس از ذخیره، bot.Id پر شده است
+        
                 return new CommandResult(true, "blog created successfully.", blog);
             }
             catch (Exception ex)
@@ -127,26 +131,45 @@ namespace Fitamon.Persistence.EntityFramework.Blog.Services
 
             return blog;
         }
-        public async Task<CommandResult> UpdateBlogById(int id, BlogEntity blog)
+        public async Task<CommandResult> UpdateBlogById(int id, string name)
         {
-            if (blog == null)
-                return new CommandResult(false, "Bot data cannot be null.");
+            // اعتبارسنجی ورودی
+            if (string.IsNullOrWhiteSpace(name))
+                return new CommandResult(false, "Blog name is required.");
 
-            var existingBot = await _context.Blogs.FindAsync(id);
-            if (existingBot == null)
-                return new CommandResult(false, $"Bot with ID {id} not found.");
+            name = name.Trim();
 
-
-            _context.Entry(existingBot).CurrentValues.SetValues(blog);
+            // (اختیاری) محدودیت طول نام
+            if (name.Length > 100)
+                return new CommandResult(false, "Blog name cannot exceed 100 characters.");
 
             try
             {
+                // پیدا کردن بلاگ موجود
+                var existingBlog = await _context.Blogs.FindAsync(id);
+                if (existingBlog == null)
+                    return new CommandResult(false, $"Blog with ID {id} not found.");
+
+                // (اختیاری) جلوگیری از تکرار نام — فقط اگر نام تغییر کرده باشد
+                if (existingBlog.Name != name &&
+                    await _context.Blogs.AnyAsync(b => b.Name == name))
+                {
+                    return new CommandResult(false, "A blog with this name already exists.");
+                }
+
+                // آپدیت نام
+                existingBlog.Name = name;
+
+                // ذخیره تغییرات
                 await _context.SaveChangesAsync();
-                return new CommandResult(true, "blog updated successfully.", existingBot);
+
+                return new CommandResult(true, "Blog updated successfully.", existingBlog);
             }
             catch (Exception ex)
             {
-                return new CommandResult(false, $"Failed to update blog: {ex.Message}");
+                // نمایش دقیق‌تر خطا برای دیباگ
+                var errorMessage = ex.InnerException?.Message ?? ex.Message;
+                return new CommandResult(false, $"Failed to update blog: {errorMessage}");
             }
         }
 

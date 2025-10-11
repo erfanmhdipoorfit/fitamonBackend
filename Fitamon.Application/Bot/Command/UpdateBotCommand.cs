@@ -7,13 +7,13 @@ namespace Fitamon.Application.Bot.Command
 {
    public class UpdateBotCommand:IRequest<CommandResult>
     {
-        public UpdateBotCommand(int botId,BotEntity bot)
+        public UpdateBotCommand(int botId,string name)
         {
             BotId = botId;
-            Bot = bot;
+            Name = name;
         }
 
         public int BotId { get; set; }
-        public BotEntity Bot { get; set; }
+        public string Name { get; set; }
     }
 }

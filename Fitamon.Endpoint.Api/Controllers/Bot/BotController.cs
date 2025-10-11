@@ -4,6 +4,7 @@ using Fitamon.Domain.Bot.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Seyat.Shared.Domain.Dtos;
+using System.Threading;
 
 namespace Fitamon.Endpoint.Api.Controllers.Bot
 {
@@ -65,9 +66,10 @@ namespace Fitamon.Endpoint.Api.Controllers.Bot
         /// <param name="bot"></param>
         /// <returns></returns>
         [HttpPost("createBot")]
-        public async Task<IActionResult> Post(BotEntity bot)
+        public async Task<IActionResult> Post(CreateBotCommand filter , CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(new CreateBotCommand( bot));
+            var result = await _mediator.Send(filter, cancellationToken);
+            //var result = await _mediator.Send();
             return Ok(result);
         }
 
@@ -77,17 +79,11 @@ namespace Fitamon.Endpoint.Api.Controllers.Bot
         /// <param name="bot"></param>
         /// <returns></returns>
         [HttpPut("updateBot")]
-        public async Task<IActionResult> Put(int botId, BotEntity bot)
+        public async Task<IActionResult> Put(int botId, string name)
         {
-            if (bot == null)
+            if (name == null)
                 return BadRequest("Bot data is required.");
-
-            // ✅ امنیت: مطمئن شوید که bot.Id با botId یکی است (اگر bot.Id پر شده)
-            if (bot.Id != 0 && bot.Id != botId)
-                return BadRequest("Bot ID in URL does not match ID in body.");
-
-            // همیشه از botId (از URL) استفاده کنید — این قرارداد رایج‌تر و امن‌تر است
-            var result = await _mediator.Send(new UpdateBotCommand(botId, bot));
+            var result = await _mediator.Send(new UpdateBotCommand(botId, name));
             return Ok(result);
 
         }

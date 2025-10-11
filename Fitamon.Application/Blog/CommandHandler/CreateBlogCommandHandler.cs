@@ -15,7 +15,7 @@ namespace Fitamon.Application.Blog.CommandHandler
         }
         public Task<CommandResult> Handle(CreateBlogCommand request, CancellationToken cancellationToken)
         {
-            return _blogService.CreateBlog(request.Blog);
+            return _blogService.CreateBlog(request.Name);
         }
     }
 }

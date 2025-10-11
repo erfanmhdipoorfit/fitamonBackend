@@ -16,7 +16,7 @@ namespace Fitamon.Application.Bot.CommandHandler
         }
         public Task<CommandResult> Handle(CreateBotCommand request, CancellationToken cancellationToken)
         {
-            return _botService.CreateBot( request.Bot);
+            return _botService.CreateBot( request.Name);
         }
     }
 }
