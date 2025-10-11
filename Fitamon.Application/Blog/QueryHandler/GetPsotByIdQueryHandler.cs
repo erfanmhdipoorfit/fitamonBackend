@@ -5,16 +5,16 @@ using MediatR;
 
 namespace Fitamon.Application.Blog.QueryHandler
 {
-    public class GetBlogByIdQueryHandler : IRequestHandler<GetBlogByIdQueryFilter, BlogEntity>
+    public class GetPsotByIdQueryHandler : IRequestHandler<GetPostByIdQueryFilter, BlogEntity>
     {
-        private readonly IBlogServices _blogService;
+        private readonly IPostServices _blogService;
 
-        public GetBlogByIdQueryHandler(IBlogServices blogService)
+        public GetPsotByIdQueryHandler(IPostServices blogService)
         {
             _blogService = blogService;
         }
 
-        public Task<BlogEntity> Handle(GetBlogByIdQueryFilter request, CancellationToken cancellationToken)
+        public Task<BlogEntity> Handle(GetPostByIdQueryFilter request, CancellationToken cancellationToken)
         {
             return _blogService.GetBlogById(request.BlogId);
         }

@@ -6,11 +6,11 @@ using Seyat.Shared.Domain.Dtos;
 
 namespace Fitamon.Persistence.EntityFramework.Blog.Services
 {
-    public class BlogServices : IBlogServices
+    public class PostsServices : IPostServices
     {
-        private readonly BlogDbContext _context;
+        private readonly PostsDbContext _context;
 
-        public BlogServices(BlogDbContext context) 
+        public PostsServices(PostsDbContext context) 
         {
             _context = context;
         }

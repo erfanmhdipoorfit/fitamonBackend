@@ -7,15 +7,15 @@ using Seyat.Shared.Domain.Dtos;
 
 namespace Fitamon.Application.Blog.CommandHandler
 {
-    public class DeleteBlogCommandHandler : IRequestHandler<DeleteBlogCommand, CommandResult>
+    public class DeletePostCommandHandler : IRequestHandler<DeletePostCommand, CommandResult>
     {
-        private readonly IBlogServices _blogService;
+        private readonly IPostServices _blogService;
 
-        public DeleteBlogCommandHandler(IBlogServices blogService)
+        public DeletePostCommandHandler(IPostServices blogService)
         {
             _blogService = blogService;
         }
-        public Task<CommandResult> Handle(DeleteBlogCommand request, CancellationToken cancellationToken)
+        public Task<CommandResult> Handle(DeletePostCommand request, CancellationToken cancellationToken)
         {
             return _blogService.DeleteBlog(request.BlogIds);
         }

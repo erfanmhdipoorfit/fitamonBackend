@@ -5,15 +5,15 @@ using Seyat.Shared.Domain.Dtos;
 
 namespace Fitamon.Application.Blog.CommandHandler
 {
-    public class CreateBlogCommandHandler : IRequestHandler<CreateBlogCommand, CommandResult>
+    public class CreatePostCommandHandler : IRequestHandler<CreatePostCommand, CommandResult>
     {
-        private readonly IBlogServices _blogService;
+        private readonly IPostServices _blogService;
 
-        public CreateBlogCommandHandler(IBlogServices blogService)
+        public CreatePostCommandHandler(IPostServices blogService)
         {
             _blogService = blogService;
         }
-        public Task<CommandResult> Handle(CreateBlogCommand request, CancellationToken cancellationToken)
+        public Task<CommandResult> Handle(CreatePostCommand request, CancellationToken cancellationToken)
         {
             return _blogService.CreateBlog(request.Name);
         }

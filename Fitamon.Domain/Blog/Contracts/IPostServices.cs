@@ -3,7 +3,7 @@ using Seyat.Shared.Domain.Dtos;
 
 namespace Fitamon.Domain.Blog.Contracts;
 
-public interface IBlogServices
+public interface IPostServices
 {
     Task<List<BlogEntity>> GetAllBlog(int pageIndex, int pageSize);
     Task<BlogEntity> GetBlogById(int partyId);

@@ -4,9 +4,9 @@ using Seyat.Shared.Domain.Dtos;
 
 namespace Fitamon.Application.Blog.Command
 {
-    public class CreateBlogCommand:IRequest<CommandResult>
+    public class CreatePostCommand:IRequest<CommandResult>
     {
-        public CreateBlogCommand(string name)
+        public CreatePostCommand(string name)
         {
             Name = name;
         }

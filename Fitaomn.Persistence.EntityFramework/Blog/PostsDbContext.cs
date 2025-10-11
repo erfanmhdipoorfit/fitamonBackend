@@ -1,9 +1,9 @@
 ﻿using Fitamon.Domain.Blog.Entities;
 using Microsoft.EntityFrameworkCore;
 
-public class BlogDbContext : DbContext
+public class PostsDbContext : DbContext
 {
-    public BlogDbContext(DbContextOptions<BlogDbContext> options) : base(options) { }
+    public PostsDbContext(DbContextOptions<PostsDbContext> options) : base(options) { }
 
     public DbSet<BlogEntity> Blogs { get; set; } // بهتره اسمش جمع باشه: Blogs
 

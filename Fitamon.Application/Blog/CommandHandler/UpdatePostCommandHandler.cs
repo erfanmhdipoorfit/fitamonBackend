@@ -6,11 +6,11 @@ using Seyat.Shared.Domain.Dtos;
 
 namespace Fitamon.Application.Blog.CommandHandler
 {
-    public class UpdateBlogCommandHandler : IRequestHandler<UpdateBlogCommand, CommandResult>
+    public class UpdatePostCommandHandler : IRequestHandler<UpdateBlogCommand, CommandResult>
     {
-        private readonly IBlogServices _blogService;
+        private readonly IPostServices _blogService;
 
-        public UpdateBlogCommandHandler(IBlogServices blogService)
+        public UpdatePostCommandHandler(IPostServices blogService)
         {
             _blogService = blogService;
         }

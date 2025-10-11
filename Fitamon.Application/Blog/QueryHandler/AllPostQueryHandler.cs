@@ -6,16 +6,16 @@ using MediatR;
 
 namespace Fitamon.Application.Blog.QueryHandler
 {
-    public class AllBlogQueryHandler : IRequestHandler<AllBlogQueryFilter, List<BlogEntity>>
+    public class AllPostQueryHandler : IRequestHandler<AllPostQueryFilter, List<BlogEntity>>
     {
-        private readonly IBlogServices _blogService;
+        private readonly IPostServices _blogService;
 
-        public AllBlogQueryHandler(IBlogServices blogService)
+        public AllPostQueryHandler(IPostServices blogService)
         {
             _blogService = blogService;
         }
 
-        public Task<List<BlogEntity>> Handle(AllBlogQueryFilter request, CancellationToken cancellationToken)
+        public Task<List<BlogEntity>> Handle(AllPostQueryFilter request, CancellationToken cancellationToken)
         {
             return _blogService.GetAllBlog(request.PageIndex, request.PageSize);
         }

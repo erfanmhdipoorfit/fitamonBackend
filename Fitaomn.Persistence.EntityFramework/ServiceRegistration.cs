@@ -15,10 +15,10 @@ public static class ServiceRegistration
 
         services.AddDbContext<BotDbContext>(options =>
             options.UseSqlServer(connectionString));
-        services.AddDbContext<BlogDbContext>(options =>
+        services.AddDbContext<PostsDbContext>(options =>
             options.UseSqlServer(connectionString));
         services.AddScoped<IBotServices, BotServices>();
-        services.AddScoped<IBlogServices, BlogServices>();
+        services.AddScoped<IPostServices, PostsServices>();
       
       
         return services;

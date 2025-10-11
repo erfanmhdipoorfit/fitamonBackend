@@ -12,12 +12,12 @@ namespace Fitamon.Endpoint.Api.Controllers.Blog
 
     [Route("api/[controller]")]
     [ApiController]
-    public class BlogController : ControllerBase
+    public class PostController : ControllerBase
     {
 
         private readonly IMediator _mediator;
 
-        public BlogController(IMediator mediator) => _mediator = mediator;
+        public PostController(IMediator mediator) => _mediator = mediator;
 
         /// <summary>
         /// لیست بلاگ ها
@@ -25,12 +25,12 @@ namespace Fitamon.Endpoint.Api.Controllers.Blog
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        [HttpGet("GetAllBlogs")]
+        [HttpGet("GetAllPosts")]
         public async Task<IActionResult> Lists(
              int pageIndex, int pageSize)
         {
 
-            var query = new AllBlogQueryFilter(
+            var query = new AllPostQueryFilter(
                 pageIndex,
                 pageSize
 
@@ -51,7 +51,7 @@ namespace Fitamon.Endpoint.Api.Controllers.Blog
              int botId)
         {
 
-            var query = new GetBlogByIdQueryFilter(
+            var query = new GetPostByIdQueryFilter(
                 botId
               );
             var result = await _mediator.Send(query);
@@ -66,7 +66,7 @@ namespace Fitamon.Endpoint.Api.Controllers.Blog
         /// <param name="bot"></param>
         /// <returns></returns>
         [HttpPost("createBlog")]
-        public async Task<IActionResult> Post(CreateBlogCommand filter , CancellationToken cancellationToken)
+        public async Task<IActionResult> Post(CreatePostCommand filter , CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(filter, cancellationToken);
             return Ok(result);
@@ -100,7 +100,7 @@ namespace Fitamon.Endpoint.Api.Controllers.Blog
                 return BadRequest(new CommandResult(false, "blog IDs list cannot be null or empty.", 400, null));
             }
 
-            var command = new DeleteBlogCommand(BlogIds);
+            var command = new DeletePostCommand(BlogIds);
             var result = await _mediator.Send(command);
 
             if (result.Succeed)

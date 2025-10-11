@@ -3,9 +3,9 @@ using MediatR;
 
 namespace Fitamon.Application.Blog.Query
 {
-   public class AllBlogQueryFilter:IRequest<List<BlogEntity>>
+   public class AllPostQueryFilter:IRequest<List<BlogEntity>>
     {
-        public AllBlogQueryFilter(int pageIndex, int pageSize)
+        public AllPostQueryFilter(int pageIndex, int pageSize)
         {
             PageIndex = pageIndex;
             PageSize = pageSize;

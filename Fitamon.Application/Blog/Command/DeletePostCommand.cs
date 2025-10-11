@@ -5,9 +5,9 @@ using Seyat.Shared.Domain.Dtos;
 
 namespace Fitamon.Application.Blog.Command
 {
-    public class DeleteBlogCommand:IRequest<CommandResult>
+    public class DeletePostCommand:IRequest<CommandResult>
     {
-        public DeleteBlogCommand(List<int> blogIds)
+        public DeletePostCommand(List<int> blogIds)
         {
             BlogIds = blogIds;
         }
