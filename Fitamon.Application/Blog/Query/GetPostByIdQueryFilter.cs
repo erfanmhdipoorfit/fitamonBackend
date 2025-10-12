@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Fitamon.Application.Blog.Query
 {
-    public class GetPostByIdQueryFilter:IRequest<BlogEntity>
+    public class GetPostByIdQueryFilter:IRequest<PostEntity>
     {
         public GetPostByIdQueryFilter(int blogId)
         {

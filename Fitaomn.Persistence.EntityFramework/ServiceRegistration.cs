@@ -9,16 +9,14 @@ public static class ServiceRegistration
 {
     public static IServiceCollection AddPersistenceServices(this IServiceCollection services, string? connectionString)
     {
-        // ✅ بررسی null بودن Connection String
         if (string.IsNullOrEmpty(connectionString))
             throw new InvalidOperationException("Connection string 'BotDbContext' is not configured.");
 
-        services.AddDbContext<BotDbContext>(options =>
-            options.UseSqlServer(connectionString));
-        services.AddDbContext<PostsDbContext>(options =>
-            options.UseSqlServer(connectionString));
+        services.AddDbContext<BotDbContext>(options => options.UseSqlServer(connectionString));
+        services.AddDbContext<BlogDbContext>(options =>options.UseSqlServer(connectionString));
+        ///////////////////////////////////////////////////////////////////////////////////////
         services.AddScoped<IBotServices, BotServices>();
-        services.AddScoped<IPostServices, PostsServices>();
+        services.AddScoped<IPostServices, PostServices>();
       
       
         return services;

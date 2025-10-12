@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Fitamon.Domain.Blog.Entities
 {
-    class Tag
+   public class TagEntity
     {
     }
 }

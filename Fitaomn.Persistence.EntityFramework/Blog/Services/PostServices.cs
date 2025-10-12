@@ -6,11 +6,11 @@ using Seyat.Shared.Domain.Dtos;
 
 namespace Fitamon.Persistence.EntityFramework.Blog.Services
 {
-    public class PostsServices : IPostServices
+    public class PostServices : IPostServices
     {
-        private readonly PostsDbContext _context;
+        private readonly BlogDbContext _context;
 
-        public PostsServices(PostsDbContext context) 
+        public PostServices(BlogDbContext context) 
         {
             _context = context;
         }
@@ -25,11 +25,11 @@ namespace Fitamon.Persistence.EntityFramework.Blog.Services
             try
             {
            
-                var blog = new BlogEntity
+                var blog = new PostEntity
                 {
                     Name = name.Trim()
                 };
-                _context.Blogs.Add(blog);
+                _context.Posts.Add(blog);
                 await _context.SaveChangesAsync();
 
         
@@ -68,7 +68,7 @@ namespace Fitamon.Persistence.EntityFramework.Blog.Services
             try
             {
                 // گرفتن رکوردهای موجود برای حذف
-                var botsToDelete = await _context.Blogs
+                var botsToDelete = await _context.Posts
                     .Where(b => validIds.Contains(b.Id))
                     .ToListAsync();
 
@@ -83,7 +83,7 @@ namespace Fitamon.Persistence.EntityFramework.Blog.Services
                 }
 
                 // حذف رکوردها
-                _context.Blogs.RemoveRange(botsToDelete);
+                _context.Posts.RemoveRange(botsToDelete);
                 await _context.SaveChangesAsync();
 
                 // اختیاری: می‌تونی IDهای حذف‌شده یا تعدادشون رو برگردونی
@@ -106,26 +106,26 @@ namespace Fitamon.Persistence.EntityFramework.Blog.Services
                 );
             }
         }
-        public async Task<List<BlogEntity>> GetAllBlog(int pageIndex, int pageSize)
+        public async Task<List<PostEntity>> GetAllBlog(int pageIndex, int pageSize)
         {
             // اعتبارسنجی ورودی
             if (pageIndex < 1) pageIndex = 1;
             if (pageSize < 1) pageSize = 10;
 
             // خواندن از دیتابیس + پیجینیشن
-            var pagedBots = await _context.Blogs
+            var pagedBots = await _context.Posts
                 .Skip((pageIndex - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
 
             return pagedBots;
         }
-        public async Task<BlogEntity> GetBlogById(int id)
+        public async Task<PostEntity> GetBlogById(int id)
         {
             if (id <= 0)
                 throw new ArgumentException("blog ID must be greater than zero.", nameof(id));
 
-            var blog = await _context.Blogs.FindAsync(id);
+            var blog = await _context.Posts.FindAsync(id);
             if (blog == null)
                 throw new KeyNotFoundException($"blog with ID {id} not found.");
 
@@ -146,13 +146,13 @@ namespace Fitamon.Persistence.EntityFramework.Blog.Services
             try
             {
                 // پیدا کردن بلاگ موجود
-                var existingBlog = await _context.Blogs.FindAsync(id);
+                var existingBlog = await _context.Posts.FindAsync(id);
                 if (existingBlog == null)
                     return new CommandResult(false, $"Blog with ID {id} not found.");
 
                 // (اختیاری) جلوگیری از تکرار نام — فقط اگر نام تغییر کرده باشد
                 if (existingBlog.Name != name &&
-                    await _context.Blogs.AnyAsync(b => b.Name == name))
+                    await _context.Posts.AnyAsync(b => b.Name == name))
                 {
                     return new CommandResult(false, "A blog with this name already exists.");
                 }

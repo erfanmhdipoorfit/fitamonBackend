@@ -1,6 +1,6 @@
 ﻿namespace Fitamon.Domain.Blog.Contracts
 { 
-    class ITagServices
+   public interface ITagServices
     {
     }
 }

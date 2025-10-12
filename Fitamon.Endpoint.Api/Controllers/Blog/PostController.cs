@@ -1,6 +1,5 @@
 ﻿using Fitamon.Application.Blog.Command;
 using Fitamon.Application.Blog.Query;
-using Fitamon.Domain.Blog.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Seyat.Shared.Domain.Dtos;
@@ -66,7 +65,7 @@ namespace Fitamon.Endpoint.Api.Controllers.Blog
         /// <param name="bot"></param>
         /// <returns></returns>
         [HttpPost("createBlog")]
-        public async Task<IActionResult> Post(CreatePostCommand filter , CancellationToken cancellationToken)
+        public async Task<IActionResult> Post(CreatePostCommand filter, CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(filter, cancellationToken);
             return Ok(result);

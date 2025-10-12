@@ -1,10 +1,8 @@
 ﻿using Fitamon.Application.Bot.Command;
 using Fitamon.Application.Bot.Query;
-using Fitamon.Domain.Bot.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Seyat.Shared.Domain.Dtos;
-using System.Threading;
 
 namespace Fitamon.Endpoint.Api.Controllers.Bot
 {
@@ -24,7 +22,7 @@ namespace Fitamon.Endpoint.Api.Controllers.Bot
         /// <param name="pageSize"></param>
         /// <returns></returns>
         [HttpGet("GetAllBots")]
- 
+
         public async Task<IActionResult> Lists(
              int pageIndex, int pageSize)
         {
@@ -66,7 +64,7 @@ namespace Fitamon.Endpoint.Api.Controllers.Bot
         /// <param name="bot"></param>
         /// <returns></returns>
         [HttpPost("createBot")]
-        public async Task<IActionResult> Post(CreateBotCommand filter , CancellationToken cancellationToken)
+        public async Task<IActionResult> Post(CreateBotCommand filter, CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(filter, cancellationToken);
             //var result = await _mediator.Send();

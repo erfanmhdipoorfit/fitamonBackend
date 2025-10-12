@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Fitamon.Application.Blog.QueryHandler
 {
-    public class AllPostQueryHandler : IRequestHandler<AllPostQueryFilter, List<BlogEntity>>
+    public class AllPostQueryHandler : IRequestHandler<AllPostQueryFilter, List<PostEntity>>
     {
         private readonly IPostServices _blogService;
 
@@ -15,7 +15,7 @@ namespace Fitamon.Application.Blog.QueryHandler
             _blogService = blogService;
         }
 
-        public Task<List<BlogEntity>> Handle(AllPostQueryFilter request, CancellationToken cancellationToken)
+        public Task<List<PostEntity>> Handle(AllPostQueryFilter request, CancellationToken cancellationToken)
         {
             return _blogService.GetAllBlog(request.PageIndex, request.PageSize);
         }
